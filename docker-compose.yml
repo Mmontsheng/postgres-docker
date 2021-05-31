@@ -1,0 +1,19 @@
+version: '3.8'
+
+services:
+  database_postgres:
+    restart: unless-stopped
+    env_file: .env
+    image: postgres:13.3-alpine
+    networks:
+      - postgres-database
+    #volumes:
+    # - /data/postgres:/var/lib/postgresql/data
+    environment:
+      POSTGRES_USER: ${USER}
+      POSTGRES_PASSWORD: ${PASSWORD}
+    ports: 
+      - "5432:5432"
+networks:
+  postgres-database:
+    external: true
